@@ -38,14 +38,17 @@ const CartPage = () => {
         ))}
       </ItemList>
       <Summary>
-        <p>Total: ${total}</p>
+  <span>Total:</span>
+  <span>${total}</span>
+</Summary>
+
         <Actions>
           <Link to="/">
             <Button>Volver</Button>
           </Link>
           <Button onClick={handleCheckout}>Finalizar compra</Button>
         </Actions>
-      </Summary>
+ 
     </Wrapper>
   )
 }

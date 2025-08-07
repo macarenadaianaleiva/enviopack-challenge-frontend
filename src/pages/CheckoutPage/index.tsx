@@ -4,10 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '../../store'
 import { clearCart } from '../../store/cart/cartSlice'
 import { updateCredit } from '../../store/user/userSlice'
-import styled from 'styled-components'
 import productsData from '../../data/products.json'
 import type { Product } from '../../types/product'
-import { Button, Wrapper } from './styles'
+import { Button, Card, Container, Message, Title } from './styles'
 
 const CheckoutPage = () => {
   const dispatch = useDispatch()
@@ -43,27 +42,29 @@ const CheckoutPage = () => {
   if (success === null) return null
 
   return (
-    <Wrapper>
-      {success ? (
-        <>
-          <h1>✅ ¡Compra exitosa!</h1>
-          <p>Se descontaron ${purchaseTotal.current} de tu crédito.</p>
-          <Link to="/">
-            <Button>Volver al catálogo</Button>
-          </Link>
-        </>
-      ) : (
-        <>
-          <h1>❌ Crédito insuficiente</h1>
-          <p>
-            Tu crédito actual es de ${user.credit}, pero el total es ${total}.
-          </p>
-          <Link to="/cart">
-            <Button>Volver al carrito</Button>
-          </Link>
-        </>
-      )}
-    </Wrapper>
+    <Container>
+      <Title>Estado de la compra</Title>
+      <Card>
+        {success ? (
+          <>
+            <Message>La compra se realizó con éxito</Message>
+            <Link to="/">
+              <Button>Volver al catálogo</Button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Message>
+              Ocurrió un error con la compra, revisá que el importe no supere el crédito disponible
+              en tu cuenta
+            </Message>
+            <Link to="/cart">
+              <Button>Volver al carrito</Button>
+            </Link>
+          </>
+        )}
+      </Card>
+    </Container>
   )
 }
 

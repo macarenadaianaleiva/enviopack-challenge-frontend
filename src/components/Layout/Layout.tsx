@@ -1,15 +1,13 @@
-import type { ReactNode } from 'react'
+import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
 
-interface Props {
-  children: ReactNode
-}
-
-const Layout = ({ children }: Props) => {
+const Layout = () => {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main>
+        <Outlet /> 
+      </main>
     </>
   )
 }

@@ -17,7 +17,7 @@ const CartItem = ({ product }: Props) => {
       <ContentBox>
         <Info>
           <Title>{product.title}</Title>
-          <Price>${product.price}</Price>
+          <Price>$ {product.price}</Price>
         </Info>
         <RemoveButton onClick={() => dispatch(removeFromCart(product.id))}>X</RemoveButton>
       </ContentBox>

@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import CartItem from '../../components/CartItem'
 import type { Product } from '../../types/product'
 import productsData from '../../data/products.json'
-import { Actions, Button, ItemList, Summary, Wrapper } from './styles'
+import { Actions, Button, EmptyCartActions, ItemList, Summary, Wrapper } from './styles'
 
 const CartPage = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items)
@@ -24,7 +24,11 @@ const CartPage = () => {
     return (
       <Wrapper>
         <h2>Tu carrito está vacío</h2>
-        <Link to="/">Volver al catálogo</Link>
+        <EmptyCartActions>
+          <Link to="/">
+            <Button>Volver al catálogo</Button>
+          </Link>
+        </EmptyCartActions>
       </Wrapper>
     )
   }
@@ -38,17 +42,16 @@ const CartPage = () => {
         ))}
       </ItemList>
       <Summary>
-  <span>Total:</span>
-  <span>${total}</span>
-</Summary>
+        <span>Total</span>
+        <span>$ {total}</span>
+      </Summary>
 
-        <Actions>
-          <Link to="/">
-            <Button>Volver</Button>
-          </Link>
-          <Button onClick={handleCheckout}>Finalizar compra</Button>
-        </Actions>
- 
+      <Actions>
+        <Link to="/">
+          <Button>Volver al catálogo</Button>
+        </Link>
+        <Button onClick={handleCheckout}>Finalizar compra</Button>
+      </Actions>
     </Wrapper>
   )
 }

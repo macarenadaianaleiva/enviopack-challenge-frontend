@@ -38,8 +38,8 @@ const CatalogPage = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
         <div>
-          <label>ORDENAR POR</label>
-          <select onChange={(e) => setSort(e.target.value)} value={sort}>
+          <label htmlFor="sort-select">ORDENAR POR</label>
+          <select onChange={(e) => setSort(e.target.value)} value={sort} id="sort-select">
             <option value="">Seleccionar</option>
             <option value="cheap">Más baratos</option>
             <option value="expensive">Más caros</option>

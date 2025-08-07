@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '../../store'
 import { clearCart } from '../../store/cart/cartSlice'
@@ -10,7 +10,6 @@ import { Button, Card, Container, Message, Title } from './styles'
 
 const CheckoutPage = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const cartItems = useSelector((state: RootState) => state.cart.items)
   const user = useSelector((state: RootState) => state.user)
   const ranOnce = useRef(false)

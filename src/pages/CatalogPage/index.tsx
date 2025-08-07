@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react'
-import dataJSON  from '../data/products.json'
-import ProductCard from '../components/ProductCard'
-import styled from 'styled-components'
-import type { Product } from '../types/product'
+import dataJSON from '../../data/products.json'
+import ProductCard from '../../components/ProductCard'
+import type { Product } from '../../types/product'
+import { CardContainer, Controls, Grid, Pagination, Wrapper } from './styles'
 
 const data = dataJSON.productos
 const PRODUCTS_PER_PAGE = 6
@@ -13,9 +13,7 @@ const CatalogPage = () => {
   const [page, setPage] = useState(1)
 
   const filteredProducts = useMemo(() => {
-    let result = data.filter((p: Product) =>
-      p.title.toLowerCase().includes(search.toLowerCase())
-    )
+    let result = data.filter((p: Product) => p.title.toLowerCase().includes(search.toLowerCase()))
 
     if (sort === 'cheap') result = [...result].sort((a, b) => a.price - b.price)
     if (sort === 'expensive') result = [...result].sort((a, b) => b.price - a.price)
@@ -31,6 +29,7 @@ const CatalogPage = () => {
   return (
     <Wrapper>
       <h1>Catálogo</h1>
+
       <Controls>
         <input
           type="text"
@@ -38,16 +37,21 @@ const CatalogPage = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <select onChange={(e) => setSort(e.target.value)} value={sort}>
-          <option value="">Seleccionar</option>
-          <option value="cheap">Más baratos</option>
-          <option value="expensive">Más caros</option>
-        </select>
+        <div>
+          <label>ORDENAR POR</label>
+          <select onChange={(e) => setSort(e.target.value)} value={sort}>
+            <option value="">Seleccionar</option>
+            <option value="cheap">Más baratos</option>
+            <option value="expensive">Más caros</option>
+          </select>
+        </div>
       </Controls>
 
       <Grid>
         {paginatedProducts.map((p: Product) => (
-          <ProductCard key={p.id} product={p} />
+          <CardContainer key={p.id}>
+            <ProductCard product={p} />
+          </CardContainer>
         ))}
       </Grid>
 
@@ -65,27 +69,3 @@ const CatalogPage = () => {
 }
 
 export default CatalogPage
-
-const Wrapper = styled.div`
-  padding: 2rem;
-`
-
-const Controls = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-`
-
-const Grid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-`
-
-const Pagination = styled.div`
-  margin-top: 2rem;
-  button {
-    margin-right: 0.5rem;
-    padding: 0.5rem;
-  }
-`

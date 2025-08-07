@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import profileData from '../../data/profile.json'
 
 interface UserState {
   id: number
@@ -8,13 +9,7 @@ interface UserState {
   credit: number
 }
 
-const initialState: UserState = {
-  id: 10982,
-  username: 'juanignacio',
-  firstName: 'Juan Ignacio',
-  lastName: 'Fernandez',
-  credit: 50000,
-}
+const initialState: UserState =  profileData.profile
 
 const userSlice = createSlice({
   name: 'user',

@@ -6,10 +6,17 @@ export const CardWrapper = styled.div`
   border-radius: 10px;
   text-align: center;
   width: 100%;
-  max-width: 220px;
+  min-height: 340px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
 `
 
 export const Image = styled.img`

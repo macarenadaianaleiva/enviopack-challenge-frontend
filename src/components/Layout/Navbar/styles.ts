@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 interface HamburgerButtonProps {
-  isHidden?: boolean
+  $isHidden?: boolean
 }
 
 export const NavbarWrapper = styled.header`
@@ -49,7 +49,7 @@ export const HamburgerButton = styled.button<HamburgerButtonProps>`
   display: none;
 
   @media (max-width: 768px) {
-    display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
+    display: ${({ $isHidden }) => ($isHidden ? 'none' : 'block')};
     background: none;
     border: none;
     color: white;

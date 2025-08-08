@@ -45,7 +45,7 @@ const Navbar = () => {
       <HamburgerButton
         onClick={() => setIsMenuOpen(true)}
         aria-label="Abrir menú"
-        isHidden={isMenuOpen}
+        $isHidden={isMenuOpen}
       >
         <FiMenu />
       </HamburgerButton>

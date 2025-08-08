@@ -1,18 +1,28 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import cartReducer from './cart/cartSlice'
 import userReducer from './user/userSlice'
 
-const loadState = () => {
+const rootReducer = combineReducers({
+  cart: cartReducer,
+  user: userReducer,
+})
+
+export const store = configureStore({
+  reducer: rootReducer,
+  preloadedState: loadState(),
+})
+
+function loadState() {
   try {
     const serializedState = localStorage.getItem('reduxState')
     if (!serializedState) return undefined
     return JSON.parse(serializedState)
-  } catch (err) {
+  } catch {
     return undefined
   }
 }
 
-const saveState = (state: RootState) => {
+function saveState(state: RootState) {
   try {
     const serializedState = JSON.stringify({
       cart: state.cart,
@@ -21,14 +31,6 @@ const saveState = (state: RootState) => {
     localStorage.setItem('reduxState', serializedState)
   } catch {}
 }
-
-export const store = configureStore({
-  reducer: {
-    cart: cartReducer,
-    user: userReducer,
-  },
-  preloadedState: loadState(),
-})
 
 store.subscribe(() => {
   saveState(store.getState())
